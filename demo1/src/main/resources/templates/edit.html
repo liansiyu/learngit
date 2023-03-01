@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css"/>
+    <link rel="stylesheet" th:href="@{/css/edit.css}" type="text/css"/>
+
+    <script th:src="@{/js/vue.js}"></script>
+    <!-- 挂载axios -->
+    <script th:src="@{/js/axios.min.js}"></script>
+    <script th:src="@{/js/addORedit.js}"></script>
+</head>
+<body>
+        <div class="search-box">
+            <form th:action="@{/get/update}" method="get" onsubmit="return preCheck();">
+                <input type="hidden" name="id" th:value="${session.editprogram.id}">
+                <div class="onebox firstbox">
+                    <span>节目名（必填）</span>
+                    <input type="text" class="name" name="name" th:value="${session.editprogram.name}" placeholder="必填项"/>
+                </div>
+                <div class="onebox">
+                    <span>类别（必选）</span>
+                    <select name="type" id="">
+                        <option selected disabled>请选择</option>
+                        <option value="1">歌舞</option>
+                        <option value="2">魔术</option>
+                    </select>
+                </div>
+                <div class="midbox onebox">
+                    <span>人员名单</span>
+                    <div>
+                    <input type="text" class="name" name="actorList" id="actors" placeholder="可选，可以留空" th:value="${session.editprogram.actorList}">
+                    <span class="tip" id="tipspan">演员名字之间请使用中文空格隔开</span>
+                    </div>
+                </div>
+                <div class="onebox lastbox">
+                    <span>看点</span>
+                    <div>
+                     <input type="text" class="name" name="view" placeholder="可选，可以留空" th:value="${session.editprogram.view}">
+                    </div>
+                </div>
+                <div class="onebox" id="rightbox">
+                    <input type="submit" class="btn" id="search" value="更新" />
+                </div>
+            </form>
+        </div>
+</body>
+</html>

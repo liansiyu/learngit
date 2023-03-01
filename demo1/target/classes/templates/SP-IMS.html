@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>春晚节目单</title>
+  <link rel="stylesheet" th:href="@{/css/reset.css}" type="text/css"/>
+  <link rel="stylesheet" th:href="@{/css/SP-IMS.css}" type="text/css" />
+  <!-- 引入样式 -->
+  <!-- 挂载vue -->
+  <script th:src="@{/js/vue.js}"></script>
+  <!-- 挂载axios -->
+  <script th:src="@{/js/axios.min.js}"></script>
+  <script th:src="@{/js/SP-IMS.js}"></script>
+</head>
+
+
+<body>
+  <div class="content">
+    <h1>2023春节联欢晚会节目单</h1>
+    <button class="btn" onclick="add()">新增</button>
+    <div class="search-area">
+      <h2>查询条件</h2>
+      <div class="search-box">
+        <form th:action="@{/get/search}" method="get">
+          <div class="onebox">
+          <span>类别</span>
+          <select name="typeId" id="">
+            <option selected disabled>请选择</option>
+            <option value="1">歌舞</option>
+            <option value="2">魔术</option>
+            <option value="0">全部</option>
+          </select>
+        </div>
+        <div class="onebox">
+          <span>参演人数</span>
+          <input type="radio" name="num" value="1" /> 1人
+          <input type="radio" name="num" value="2" /> 2人
+          <input type="radio" name="num" value="3" /> 3人及以上
+        </div>
+        <div class="onebox">
+          <span>节目名</span>
+          <input type="text" class="name" name="keyword" placeholder="请输入节目名" />
+        </div>
+        <div class="onebox" id="rightbox">
+          <input type="submit" class="btn" id="search" value="搜索" />
+        </div>
+      </form>
+      </div>
+      <div class="result-area">
+        <h2>搜索结果</h2>
+        <div class="result-content">
+          <div id="app1">
+              <ul id="result-list">
+                <li class="clearfix listhead">
+                  <div class="one">id</div>
+                  <div class="two">类别</div>
+                  <div class="three">节目名</div>
+                  <div class="four">出演者</div>
+                  <div class="five">看点</div>
+                  <div class="six">操作</div>
+                </li>
+                <li class="none-data" th:if="${#lists.isEmpty(session.data)}">
+                  <span>暂无数据</span>
+                </li>
+                <li class="clearfix" th:unless="${#lists.isEmpty(session.data)}" th:each="program:${session.data}">
+                  <div class="one" th:text="${program.id}"></div>
+                  <div class="two" th:text="${program.typeName}"></div>
+                  <div class="three" th:text="${program.name}"></div>
+                  <div class="four" th:text="${program.actorList}"></div>
+                  <div class="five" th:text="${program.view}"></div>
+                  <div class="six">
+                    <a th:href="@{/get/one(id=${program.id})}">编辑</a>
+                    <a th:href="@{/get/delete(id=${program.id})}">删除</a>
+                  </div>
+                </li>
+              </ul>
+          </div>
+          <div class="pagebutton">
+            <input type="button" value="首页" href="javascript:void(0);" th:onclick="page(1,[[${session.typeId}]],[[${session.num}]],[[${session.keyword}]])" th:disabled="${session.pageNum==1}">
+            <input type="button" value="上一页" href="javascript:void(0);" th:onclick="page([[${session.pageNum}-1]],[[${session.typeId}]],[[${session.num}]],[[${session.keyword}]])" th:disabled="${session.pageNum==1}">
+            <input type="button" value="下一页" href="javascript:void(0);" th:onclick="page([[${session.pageNum}+1]],[[${session.typeId}]],[[${session.num}]],[[${session.keyword}]])" th:disabled="${session.pageNum==session.pageCount}">
+            <input type="button" value="尾页" href="javascript:void(0);" th:onclick="page([[${session.pageCount}]],[[${session.typeId}]],[[${session.num}]],[[${session.keyword}]])" th:disabled="${session.pageNum==session.pageCount}">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ProgramActorListMapper">
+    <insert id="addRelation">
+        insert into program_actor_list values(null,#{programId},#{actorId})
+    </insert>
+    <delete id="deleteByProgramId">
+        delete from program_actor_list where program_id = #{programId}
+    </delete>
+
+
+    <select id="getList" resultType="Integer">
+         select actor_id from program_actor_list where program_id = #{id}
+    </select>
+    <select id="programListByNumMore" resultType="java.lang.Integer">
+        select program_id from program_actor_list group by program_id having count(*) >= #{num}
+    </select>
+    <select id="programListByNumEuqal" resultType="java.lang.Integer">
+        select program_id from program_actor_list group by program_id having count(*) = #{num}
+    </select>
+    <select id="getProgramListByActorId" resultType="java.lang.Integer">
+        select program_id from program_actor_list where actor_id = #{id}
+    </select>
+</mapper>

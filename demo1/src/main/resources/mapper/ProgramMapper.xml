@@ -1,0 +1,31 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.demo.mapper.ProgramMapper">
+    <insert id="add" useGeneratedKeys="true" keyProperty="id">
+        insert into program values (null,#{typeId},#{name},#{view})
+    </insert>
+    <update id="updateById">
+        update program set `name` = #{name}, type_id = #{type}, `view` = #{view} where id = #{id}
+    </update>
+    <delete id="deleteById">
+        delete from program where id = #{id}
+    </delete>
+
+    <select id="selectAll" resultType="com.example.demo.dao.pojo.Program">
+            select * from program limit #{i},4
+    </select>
+    <select id="searchByTwo" resultType="Integer">
+        SELECT id FROM program WHERE type_id = #{type} AND `name` LIKE '%${keyword}%'
+    </select>
+    <select id="searchByOne" resultType="Integer">
+        SELECT id FROM program WHERE `name` LIKE '%${keyword}%'
+    </select>
+    <select id="load" resultType="com.example.demo.dao.pojo.Program">
+        select * from program where id = #{id}
+    </select>
+    <select id="getCount" resultType="java.lang.Integer">
+        select count(*) from program
+    </select>
+    <select id="getProgramByName" resultType="com.example.demo.dao.pojo.Program">
+        select * from program where name = #{name}
+    </select>
+</mapper>

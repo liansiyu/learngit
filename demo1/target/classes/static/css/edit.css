@@ -1,0 +1,92 @@
+.btn {
+    height: 42px;
+    width: 160px;
+    border: 0;
+    border-radius: 8px;
+    background-color: #409eff;
+    margin: 30px 0;
+    font-size: 20px;
+    color: white;
+}
+
+.btn:hover {
+    background-color: #608eff;
+    cursor: pointer;
+}
+
+h2 {
+    border: 0;
+    border-left: 4px solid black;
+    padding-left: 10px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+form{
+    width: 600px;
+    margin: 0px auto;
+}
+.onebox{
+    margin: 30px auto;
+}
+
+.onebox span {
+    display: inline-block;
+    height: 40px;
+    width: 100px;
+    padding: 5px 0;
+}
+
+.firstbox span{
+    display: block;
+    width: 500px;
+    height: 40px;
+}
+
+.midbox{
+    display: flex;
+}
+
+.midbox div{
+    width: 500px;
+}
+
+
+.midbox span.tip{
+    width: 500px;
+    visibility: hidden;
+    color: rebeccapurple;
+}
+
+select,
+.name {
+    width: 300px;
+    height: 40px;
+    padding: 0 15px;
+    font-size: 16px;
+    color: black;
+    border: solid black;
+    border-width: 2px;
+    border-radius: 6px;
+    outline: none;
+}
+
+.name {
+    width: 500px;
+}
+
+.name::placeholder {
+    color: lightgrey;
+}
+
+#rightbox {
+    display: flex;
+    justify-content: center;
+}
+
+.lastbox{
+    display: flex;
+}
+
+.lastbox div{
+    width: 500px;
+}
